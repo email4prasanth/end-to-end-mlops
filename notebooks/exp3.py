@@ -4,7 +4,7 @@ import pandas as pd
 import mlflow.sklearn
 import dagshub
 dagshub.init(repo_owner='email4prasanth', repo_name='end-to-end-mlops', mlflow=True)
-mlflow.set_experiment("Experiment-2-median")
+mlflow.set_experiment("Experiment-3-mean")
 # mlflow.set_tracking_uri("https://dagshub.com/email4prasanth/mlflow_exp_dagshub.mlflow") # is already handle by mlflow=True
 from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
@@ -19,15 +19,15 @@ n_estimators = 100
 test_size = 0.2
 train_data, test_data = train_test_split(data, test_size=test_size, random_state=42)
 
-# data prepration fill the missing values using median values
-def fill_missing_with_median(df):
+# data prepration fill the missing values using mean values
+def fill_missing_with_mean(df):
     for column in df.columns:
         if df[column].isnull().any():
-            median_value = df[column].median()
-            df[column].fillna(median_value,inplace=True)
+            mean_value = df[column].mean()
+            df[column].fillna(mean_value,inplace=True)
     return df
-train_processed_data = fill_missing_with_median(train_data)
-test_processed_data = fill_missing_with_median(test_data)
+train_processed_data = fill_missing_with_mean(train_data)
+test_processed_data = fill_missing_with_mean(test_data)
 
 # split the data in training and testing
 X_train = train_processed_data.drop(columns = ['Potability'], axis=1)
