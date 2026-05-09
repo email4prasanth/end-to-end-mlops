@@ -1,0 +1,9 @@
+stages:
+  data_collection:
+    cmd: python -m .\src\data\data_collection.py
+    deps:
+    - src/data/data_collection.py
+    params:
+    - data_collection.test_size
+    outs:
+    - data/raw
